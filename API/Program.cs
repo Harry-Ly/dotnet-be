@@ -20,7 +20,7 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 // app.UseAuthorization(); Temporarily remove until we get to Authorization section
 
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 app.MapControllers();
 
 app.Run();
