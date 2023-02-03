@@ -1,4 +1,6 @@
 using API.Data;
+using API.Interfaces;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,7 @@ builder.Services.AddDbContext<DataContext>(opt =>
 }); // This service connects to DB using connection string supplied in the config
 
 builder.Services.AddCors(); // Adds CORS Policy
+builder.Services.AddScoped<ITokenService, TokenService>(); // Adds Token Service
 
 var app = builder.Build();
 
