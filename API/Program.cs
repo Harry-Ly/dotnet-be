@@ -1,7 +1,10 @@
+using System.Text;
 using API.Data;
 using API.Interfaces;
 using API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,16 @@ builder.Services.AddDbContext<DataContext>(opt =>
 
 builder.Services.AddCors(); // Adds CORS Policy
 builder.Services.AddScoped<ITokenService, TokenService>(); // Adds Token Service
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{ 
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+}); // Adds ?
 
 var app = builder.Build();
 
@@ -24,6 +37,10 @@ app.UseHttpsRedirection();
 // app.UseAuthorization(); Temporarily remove until we get to Authorization section
 
 app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+
+app.UseAuthentication();
+app.UseAuthorization();
+    
 app.MapControllers();
 
 app.Run();
