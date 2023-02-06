@@ -1,5 +1,6 @@
 using System.Text;
 using API.Data;
+using API.Extensions;
 using API.Interfaces;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,23 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Services
 builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext>(opt =>
-{
-    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-}); // This service connects to DB using connection string supplied in the config
-
-builder.Services.AddCors(); // Adds CORS Policy
-builder.Services.AddScoped<ITokenService, TokenService>(); // Adds Token Service
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{ 
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])),
-        ValidateIssuer = false,
-        ValidateAudience = false
-    };
-}); // Adds ?
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddIdentityService(builder.Configuration);
 
 var app = builder.Build();
 
