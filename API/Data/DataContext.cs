@@ -10,6 +10,7 @@ public class DataContext : DbContext
     public DataContext(IConfiguration configuration)
     {
         Configuration = configuration;
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder options)
