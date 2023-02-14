@@ -17,6 +17,7 @@ public static class ApplicationServiceExtensions
         services.AddCors(); // Adds CORS Policy
         services.AddScoped<ITokenService, TokenService>(); // Adds Token Service
         services.AddScoped<IUserRepository, UserRepository>(); // Adds User Repository Service
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // Single project so use this
 
         return services;
     }
