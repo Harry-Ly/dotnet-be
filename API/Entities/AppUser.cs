@@ -21,8 +21,9 @@ public class AppUser
     public string Country { get; set; }
     public List<Photo> Photos { get; set; } = new List<Photo>();
 
-    public int GetAge()
-    {
-        return DateOfBirth.CalculateAge();
-    }
+    // This method got the whole entity to be used so it made it less efficient.
+    // public int GetAge()
+    // {
+    //     return DateOfBirth.CalculateAge();
+    // }
 }
