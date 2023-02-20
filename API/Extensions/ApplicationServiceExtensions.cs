@@ -1,4 +1,5 @@
 using API.Data;
+using API.Helpers;
 using API.Interfaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ITokenService, TokenService>(); // Adds Token Service
         services.AddScoped<IUserRepository, UserRepository>(); // Adds User Repository Service
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // Single project so use this
+        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings")); // Gets config for Cloudinary
 
         return services;
     }
