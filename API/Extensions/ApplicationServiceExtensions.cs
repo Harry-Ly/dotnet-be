@@ -21,6 +21,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IPhotoService, PhotoService>(); // Adds Photo Service
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // Single project so use this
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings")); // Gets config for Cloudinary
+        services.AddScoped<LogUserActivity>(); // Adds action filter
 
         return services;
     }
