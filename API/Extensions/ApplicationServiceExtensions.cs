@@ -22,6 +22,7 @@ public static class ApplicationServiceExtensions
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // Single project so use this
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings")); // Gets config for Cloudinary
         services.AddScoped<LogUserActivity>(); // Adds action filter
+        services.AddScoped<ILikesRepository, LikesRepository>(); // Adds Like Repository
 
         return services;
     }
