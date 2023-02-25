@@ -22,6 +22,8 @@ public class AppUser
     public List<Photo> Photos { get; set; } = new List<Photo>();
     public List<UserLike> LikedByUsers{ get; set; }
     public List<UserLike> LikedUsers { get; set; }
+    public List<Message> MessagesSent { get; set; }
+    public List<Message> MessagesReceived { get; set; }
 
     // This method got the whole entity to be used so it made it less efficient.
     // public int GetAge()
