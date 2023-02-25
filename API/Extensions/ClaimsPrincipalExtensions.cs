@@ -8,8 +8,8 @@ public static class ClaimsPrincipalExtensions
     {
         return user.FindFirst(ClaimTypes.Name)?.Value; // We get username from the auth token that gets sent in every request
     }
-    public static string? GetUserId(this ClaimsPrincipal user)
+    public static int GetUserId(this ClaimsPrincipal user)
     {
-        return user.FindFirst(ClaimTypes.NameIdentifier)?.Value; // We get username from the auth token that gets sent in every request
+        return int.Parse(user.FindFirst(ClaimTypes.NameIdentifier)?.Value); // We get username from the auth token that gets sent in every request
     }
 }
