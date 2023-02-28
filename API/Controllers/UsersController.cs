@@ -26,6 +26,7 @@ public class UsersController : BaseApiController
         _photoService = photoService;
     }
 
+    // [Authorize(Roles = "Admin")] One way to use roles
     [HttpGet]
     public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
     {
@@ -44,6 +45,7 @@ public class UsersController : BaseApiController
         return Ok(users);
     }
 
+    // [Authorize(Roles = "Member")] One way to use roles
     [HttpGet("{username}")]
     public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
