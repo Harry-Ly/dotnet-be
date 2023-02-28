@@ -10,7 +10,7 @@ namespace API.Data;
 public class Seed
 {
     // Static represents something that can NEVER exist more than once
-    public static async Task SeedUsers(UserManager<AppUser> userManager)
+    public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
     {
         if (await userManager.Users.AnyAsync()) return;
 
@@ -22,6 +22,18 @@ public class Seed
         // From JSON to C# object so deserialize
         var users = JsonSerializer.Deserialize<List<AppUser>>(userData, options);
 
+        var roles = new List<AppRole>
+        {
+            new AppRole { Name = "Member" },
+            new AppRole { Name = "Admin" },
+            new AppRole { Name = "Moderator" }
+        };
+
+        foreach (var role in roles)
+        {
+            await roleManager.CreateAsync(role);
+        }
+        
         foreach (var user in users)
         {
             // using var hmac = new HMACSHA512();
@@ -32,7 +44,16 @@ public class Seed
 
             // context.Users.Add(user); // Not .NET Identity Way
             await userManager.CreateAsync(user, "Pa$$w0rd");
+            await userManager.AddToRoleAsync(user, "Member");
         }
+
+        var admin = new AppUser
+        {
+            UserName = "admin"
+        };
+
+        await userManager.CreateAsync(admin, "Pa$$w0rd");
+        await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
 
         // await context.SaveChangesAsync();
     }
