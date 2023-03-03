@@ -21,7 +21,11 @@ app.UseHttpsRedirection();
 // app.UseAuthorization(); Temporarily remove until we get to Authorization section
 
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+app.UseCors(builder => builder
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("https://localhost:4200"));
 
 app.UseAuthentication();
 app.UseAuthorization();
