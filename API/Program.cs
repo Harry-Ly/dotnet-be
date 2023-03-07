@@ -43,6 +43,8 @@ try
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
+    await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE [Connections]"); // Bigger scale databases
+    // context.Connections.RemoveRange(context.Connections); // Good for small scale remove operations
     await Seed.SeedUsers(userManager, roleManager);
 }
 catch (Exception e)
