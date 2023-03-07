@@ -24,11 +24,11 @@ public class UserRepository : IUserRepository
         _context.Entry(user).State = EntityState.Modified;
     }
 
-    public async Task<bool> SaveAllAsync()
-    {
-        // > 0 makes it a boolean
-        return await _context.SaveChangesAsync() > 0;
-    }
+    // public async Task<bool> SaveAllAsync()
+    // {
+    //     // > 0 makes it a boolean
+    //     return await _context.SaveChangesAsync() > 0;
+    // }
 
     public async Task<IEnumerable<AppUser>> GetUsersAsync()
     {
