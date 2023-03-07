@@ -2,6 +2,7 @@ using API.Data;
 using API.Helpers;
 using API.Interfaces;
 using API.Services;
+using API.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions;
@@ -25,6 +26,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<ILikesRepository, LikesRepository>(); // Adds Like Repository
         services.AddScoped<IMessageRepository, MessageRepository>(); // Adds Message Repository
         services.AddSignalR();
+        services.AddSingleton<PresenceTracker>(); // We want this application wide for every user that connects to service; Lives as long as application does
 
         return services;
     }
