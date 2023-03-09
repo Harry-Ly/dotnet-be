@@ -9,6 +9,12 @@ namespace API.Data;
 
 public class Seed
 {
+    // This method is used in program.cs to delete connections
+    public static async Task ClearConnections(DataContext context)
+    {
+        context.Connections.RemoveRange(context.Connections);
+        await context.SaveChangesAsync();
+    }
     // Static represents something that can NEVER exist more than once
     public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
     {
@@ -43,6 +49,8 @@ public class Seed
             // user.PasswordSalt = hmac.Key;
 
             // context.Users.Add(user); // Not .NET Identity Way
+            user.Created = DateTime.SpecifyKind(user.Created, DateTimeKind.Utc);
+            user.LastActive = DateTime.SpecifyKind(user.LastActive, DateTimeKind.Utc);
             await userManager.CreateAsync(user, "Pa$$w0rd");
             await userManager.AddToRoleAsync(user, "Member");
         }
