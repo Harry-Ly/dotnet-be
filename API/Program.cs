@@ -32,9 +32,10 @@ else
     var pgPass = pgUserPass.Split(":")[1];
     var pgHost = pgHostPort.Split(":")[0];
     var pgPort = pgHostPort.Split(":")[1];
+    var updatedHost = pgHost.Replace("flycast", "internal");
 
     // Check potential spacing if errors occur
-    connString = $"Server={pgHost}; Port={pgPort}; User Id={pgUser}; Password={pgPass}; Database={pgDb};";
+    connString = $"Server={updatedHost}; Port={pgPort}; User Id={pgUser}; Password={pgPass}; Database={pgDb};";
     //"Server=host.docker.internal; Port=5432; User Id=postgres; Password=postgrespw; Database=datingapp"
 }
 builder.Services.AddDbContext<DataContext>(opt =>
