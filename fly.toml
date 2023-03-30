@@ -1,6 +1,6 @@
-# fly.toml file generated for harry-da-course on 2023-03-29T11:30:24-05:00
+# fly.toml file generated for harry-da on 2023-03-30T09:24:45-05:00
 
-app = "harry-da-course"
+app = "harry-da"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "iad"
@@ -11,8 +11,8 @@ processes = []
 
 [env]
   ASPNETCORE_URLS = "http://+:8080"
-  CloudinarySettings__ApiKey = "257472849828813"
   CloudinarySettings__CloudName = "dwbtlm8oe"
+  CloudinarySettings__ApiKey = "257472849828813"
 
 [experimental]
   auto_rollback = true
