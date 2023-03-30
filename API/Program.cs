@@ -23,19 +23,23 @@ else
     var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
     // Parse connection URL to connection string for Npgsql
-    connUrl = connUrl.Replace("postgres://", string.Empty);
-    var pgUserPass = connUrl.Split("@")[0];
-    var pgHostPortDb = connUrl.Split("@")[1];
-    var pgHostPort = pgHostPortDb.Split("/")[0];
-    var pgDb = pgHostPortDb.Split("/")[1];
-    var pgUser = pgUserPass.Split(":")[0];
-    var pgPass = pgUserPass.Split(":")[1];
-    var pgHost = pgHostPort.Split(":")[0];
-    var pgPort = pgHostPort.Split(":")[1];
-    var updatedHost = pgHost.Replace("flycast", "internal");
+    if (connUrl != null)
+    {
+        connUrl = connUrl.Replace("postgres://", string.Empty);
+        var pgUserPass = connUrl.Split("@")[0];
+        var pgHostPortDb = connUrl.Split("@")[1];
+        var pgHostPort = pgHostPortDb.Split("/")[0];
+        var pgDb = pgHostPortDb.Split("/")[1];
+        var pgUser = pgUserPass.Split(":")[0];
+        var pgPass = pgUserPass.Split(":")[1];
+        var pgHost = pgHostPort.Split(":")[0];
+        var pgPort = pgHostPort.Split(":")[1];
+        var updatedHost = pgHost.Replace("flycast", "internal");
 
-    // Check potential spacing if errors occur
-    connString = $"Server={updatedHost}; Port={pgPort}; User Id={pgUser}; Password={pgPass}; Database={pgDb};";
+        // Check potential spacing if errors occur
+        connString = $"Server={updatedHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
+    }
+
     //"Server=host.docker.internal; Port=5432; User Id=postgres; Password=postgrespw; Database=datingapp"
 }
 builder.Services.AddDbContext<DataContext>(opt =>
