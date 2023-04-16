@@ -6,20 +6,29 @@ This is a dating application that allows users to like or message other users.
 - Database - Postgres
 - Frontend - Angular 14
 - Styling - Bootstrap 5
-- ?? - Cloudinary
-- ?? - Docker
-- ?? - Fly.io
+- Media Management - Cloudinary
+- Deployment - Fly.io
+- Container - Docker
+- Git GUI - GitKraken
+- IDE - Rider
 
 ### Setup/Installation
-[Frontend Github](https://github.com/harryly140/dating-app-fe)
+[Frontend Github](https://github.com/harryly140/dating-app-fe)  
 Local Setup:  
 Make sure your local appsettings.json exists and is correct  
+
 Build docker image  
+```
 docker build -t SOME_DOCKER_IMAGE .
-Run docker desktop and connect to the Postgres db and go to (http://localhost:8080)  
-docker run --rm -it -p 8080:80 SOME_DOCKER_IMAGE:latest  
+```  
+Run docker desktop and connect to the Postgres db and go to (http://localhost:8080) 
+``` 
+docker run --rm -it -p 8080:80 SOME_DOCKER_IMAGE:latest
+```  
 If it runs as as intended, push the image to docker
+```
 docker push SOME_DOCKER_IMAGE:latest
+```  
 If any changes occur, you have to rebuild the image and push it
 
 ### Key Concepts
