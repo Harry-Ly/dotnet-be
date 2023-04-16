@@ -5,7 +5,7 @@ This is a dating application that allows users to like or message other users.
 - Backend - .Net 7.0/Entity Framework
 - Database - Postgres
 - Frontend - Angular 14
-- Styling - Bootstrap 5
+- Styling - Bootstrap 5/Font Awesome
 - Media Management - Cloudinary
 - Deployment - Fly.io
 - Container - Docker
